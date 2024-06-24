@@ -1,0 +1,69 @@
+accounts = {}
+def create_account(account_number, name, initial_balance):
+    if account_number in accounts:
+        print("Account number already exists.")
+        return
+    accounts[account_number] = {'name': name, 'balance': initial_balance}
+    print("Account created successfully.")
+def deposit(account_number, amount):
+    if account_number not in accounts:
+        print("Account does not exist.")
+        return
+    accounts[account_number]['balance'] += amount
+    print("Deposit successful. New balance:", accounts[account_number]['balance'])
+def withdraw(account_number, amount):
+    if account_number not in accounts:
+        print("Account does not exist.")
+        return
+    if accounts[account_number]['balance'] < amount:
+        print("Insufficient balance.")
+        return
+    accounts[account_number]['balance'] -= amount
+    print("Withdrawal successful. New balance:", accounts[account_number]['balance'])
+def check_balance(account_number):
+    if account_number not in accounts:
+        print("Account does not exist.")
+        return
+    print("Current balance:", accounts[account_number]['balance'])
+
+def display_all_accounts():
+    print("All Accounts:")
+    for account_number, details in accounts.items():
+        print("Account Number:", account_number)
+        print("Name:", details['name'])
+        print("Balance:", details['balance'])
+        print()
+while True:
+    print("Banking System Menu:")
+    print("1. Create Account")
+    print("2. Deposit")
+    print("3. Withdraw")
+    print("4. Check Balance")
+    print("5. Display All Accounts")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        account_number = input("Enter account number: ")
+        name = input("Enter name: ")
+        initial_balance = float(input("Enter initial balance: "))
+        create_account(account_number, name, initial_balance)
+    elif choice == '2':
+        account_number = input("Enter account number: ")
+        amount = float(input("Enter amount to deposit: "))
+        deposit(account_number, amount)
+    elif choice == '3':
+        account_number = input("Enter account number: ")
+        amount = float(input("Enter amount to withdraw: "))
+        withdraw(account_number, amount)
+    elif choice == '4':
+        account_number = input("Enter account number: ")
+        check_balance(account_number)
+    elif choice == '5':
+        display_all_accounts()
+    elif choice == '6':
+        print("Exiting the program. Thank you!")
+        break
+    else:
+        print("Invalid choice. Please enter a valid option.")
